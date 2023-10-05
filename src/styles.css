@@ -1,6 +1,7 @@
 body, html {
     height: 100%;
     margin: 0;
+    overflow: hidden;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -15,7 +16,13 @@ body, html {
   }
   
   .logo {
-    max-width: 100%; /* Responsive: Ensure logo doesn't exceed screen width */
+    position: absolute;
+    z-index: 1000;
+    max-width: 20%; /* Responsive: Ensure logo doesn't exceed screen width */
     height: auto;
+    align-items: center;
+    top: 50%;    /* distance from the top of the nearest positioned ancestor */
+    left: 50%;   /* distance from the left of the nearest positioned ancestor */
+    transform: translate(-50%, -50%);
   }
   
