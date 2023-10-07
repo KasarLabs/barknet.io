@@ -18,11 +18,18 @@ body, html {
   .logo {
     position: absolute;
     z-index: 1000;
-    max-width: 20%; /* Responsive: Ensure logo doesn't exceed screen width */
+    max-width: 15%; /* Responsive: Ensure logo doesn't exceed screen width */
     height: auto;
     align-items: center;
     top: 50%;    /* distance from the top of the nearest positioned ancestor */
     left: 50%;   /* distance from the left of the nearest positioned ancestor */
     transform: translate(-50%, -50%);
   }
+
+  canvas {
+    margin: 0;
+    border: none;
+    display: block;
+}
+
   

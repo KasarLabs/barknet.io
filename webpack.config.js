@@ -6,15 +6,15 @@ module.exports = {
   mode: 'development',
   module: {
     rules: [
-        {
-            test: /\.(png|jpe?g|gif)$/i,
-            use: [
+      {
+        test: /\.(png|jpe?g|gif|ico)$/i,
+          use: [
                 {
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                    outputPath: 'images/'
-                }
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'images/'
+                    }
                 },
             ],
         },                    

@@ -3,11 +3,101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Logo Center</title>
-<script defer src="main.js"></script></head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <title>Barknet</title>
+  <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+<script defer src="bundle.js"></script></head>
 <body>
   <div class="logo-container">
     <img src="./images/barknet.png" alt="Logo" class="logo">
   </div>
+  <script>
+      let screenSize;
+let center;
+const startCount = 200;
+const stars = [];
+
+function randomValue(min, max) {
+    return Math.floor(min + (Math.random() * (max - min)));
+}
+
+class Star {
+    constructor() {
+        this.x = randomValue(-center.x, center.x),
+        this.y = randomValue(-center.y, center.y),
+        this.z = randomValue(0, center.x);
+        this.speed = randomValue(10, 20);
+        this.pz = this.z;
+    }
+
+    update() {
+        this.pz = this.z;
+        this.z -= this.speed;
+        if (this.z < 1) {
+            this.x = randomValue(-center.x, center.x),
+            this.y = randomValue(-center.y, center.y),
+            this.z = center.x;
+            this.pz = this.z;
+        }
+    }
+
+    draw() {
+        const scaleX = map(this.x / this.z, 0, 1, 0, center.x);
+        const scaleY = map(this.y / this.z, 0, 1, 0, center.y);
+        const radius = map(this.z, 0, center.x, 5, 0);
+
+        const scalePX = map(this.x / this.pz, 0, 1, 0, center.x);
+        const scalePY = map(this.y / this.pz, 0, 1, 0, center.y);
+
+        stroke(250);
+        strokeWeight(radius);
+        line(scalePX, scalePY, scaleX, scaleY);
+        // point(scaleX, scaleY);
+    }
+}
+
+function setWorldSize() {
+    screenSize = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+    };
+    center = createVector(screenSize.width / 2, screenSize.height / 2);
+}
+
+function createStars() {
+    for (let i = 0; i < startCount; i++) {
+        stars.push(new Star());
+    }
+}
+
+function setup() {
+    setWorldSize();
+
+    createStars();
+    createCanvas(screenSize.width, screenSize.height);
+}
+
+function windowResized() {
+    setWorldSize();
+    resizeCanvas(screenSize.width, screenSize.height);
+}
+
+function draw() {
+    background(10);
+
+    translate(center.x, center.y);
+
+    drawStars();
+}
+
+function drawStars() {
+    stars.forEach(star => {
+        star.draw();
+        star.update();
+    })
+}
+  </script>
 </body>
 </html>
+
+    
